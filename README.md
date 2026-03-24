@@ -1,4 +1,4 @@
-# transcribe
+# whispr
 
 Real-time microphone transcription using [Whisper](https://github.com/openai/whisper) via [MLX](https://github.com/ml-explore/mlx), optimized for Apple Silicon.
 
