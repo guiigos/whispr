@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+
+# Virtual environment
+.env
+.venv/
+venv
+
+# MacOS
+._*
+.DS_*
+.DS_Store
+.DS_Store?
+.Trashes
+Thumbs.db
+
+# Custom
+static/uploads/
+static/output/
+static/calibrated/
+config/measured_*.csv
