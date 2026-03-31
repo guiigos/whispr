@@ -13,11 +13,12 @@ python3 -m venv .venv
 # Activate it
 source .venv/bin/activate
 
+# Install requirements
+pip install -r requirements.txt
+
 # When you're done, deactivate with:
 deactivate
 ```
-
-> All subsequent commands (`pip install`, `python transcribe.py`) should be run with the virtual environment activated.
 
 ## Dependencies
 
