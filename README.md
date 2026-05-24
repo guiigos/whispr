@@ -27,11 +27,12 @@ deactivate
 | `numpy` | Audio buffer manipulation |
 | `sounddevice` | Microphone capture via PortAudio |
 | `mlx-whisper` | Whisper inference accelerated with Apple MLX |
+| `argostranslate` | Offline translation of the transcription (optional, only when using `--target-lang`) |
 
 Install all dependencies with:
 
 ```bash
-pip install numpy sounddevice mlx-whisper
+pip install numpy sounddevice mlx-whisper argostranslate
 ```
 
 > **Note:** `sounddevice` requires PortAudio. If you get an error, install it first:
@@ -57,6 +58,8 @@ python transcribe.py
 | `--chunk` | `-c` | `5` | Capture chunk duration in seconds |
 | `--output` | `-o` | — | `.txt` file to save the transcription |
 | `--silence-threshold` | `-s` | `0.01` | RMS silence threshold (chunks below this are skipped) |
+| `--source-lang` | `-f` | `pt` | Spoken/captured language (ISO code, e.g. `pt`, `en`, `es`) |
+| `--target-lang` | `-t` | — | Translate the transcription into this language (offline). Omit for no translation |
 | `--list-devices` | | — | List available audio devices and exit |
 | `--debug` | | — | Show RMS level of each captured chunk |
 
@@ -66,15 +69,27 @@ python transcribe.py
 # Basic usage
 python transcribe.py
 
-# Save transcription to a file
-python transcribe.py -o output.txt
-
-# Use a specific microphone and 3-second chunks
-python transcribe.py -m 2 -c 3
-
 # List available audio devices
 python transcribe.py --list-devices
 
 # Debug mode (shows RMS level per chunk)
 python transcribe.py --debug
 ```
+
+```bash
+python transcribe.py -m 1 -c 3 -s 0.002
+```
+
+### Simultaneous translation
+
+Transcribe in one language and display the text in another, fully offline:
+
+```bash
+# Listen in English, read the transcription in Portuguese
+python transcribe.py -m 1 -f en -t pt
+```
+
+> **Note:** On the first run for a given language pair, argos-translate downloads
+> the offline translation model (needs internet once). After that it works
+> offline. When no direct model exists for the pair, it pivots through English
+> automatically. Without `--target-lang` the tool only transcribes (no translation).
